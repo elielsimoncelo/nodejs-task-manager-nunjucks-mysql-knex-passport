@@ -1,5 +1,5 @@
 # sample-nodejs-nunjucks-mysql-knex-passport-task-manager
-Sample nodejs project using nunjucks, passport and mysql (knex)
+Sample nodejs project using nunjucks, mysql, knex and passport
 ---
 usuário: admin
 senha: 1234
