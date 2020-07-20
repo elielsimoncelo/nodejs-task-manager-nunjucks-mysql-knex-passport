@@ -15,16 +15,14 @@ $ docker-compose up -d
 
 ## Configurações padrões
 
-##### Usuário da aplicação
----
+### Usuário da aplicação
 ```sh
 host: http://localhost:13000/
 username: admin
 password: 1234
 ```
 
-##### Usuário do banco de dados
----
+### Usuário do banco de dados
 ```sh
 host: localhost
 port: 13306
