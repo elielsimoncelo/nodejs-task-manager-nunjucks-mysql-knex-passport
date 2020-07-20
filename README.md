@@ -6,14 +6,14 @@
 - [Docker Install](https://docs.docker.com/engine/install/)
 - [Docker Compose Install](https://docs.docker.com/compose/install/)
 
-### Executando o projeto 
+## Executando o projeto 
 ```sh
 $ git clone https://github.com/sousaeliel/nodejs-task-manager-nunjucks-mysql-knex-passport.git
 $ cd nodejs-task-manager-nunjucks-mysql-knex-passport
 $ docker-compose up -d
 ```
 
-### Configurações padrões
+## Configurações padrões
 
 ##### Usuário da aplicação
 ---
@@ -33,7 +33,7 @@ username: controle_tarefas
 password: p@$$w0rd
 ```
 
-### Destruindo a infraestrutura criada para o projeto 
+## Destruindo a infraestrutura criada para o projeto 
 ```sh
 $ cd nodejs-task-manager-nunjucks-mysql-knex-passport
 $ docker-compose down -d --remove-orphans # to remove context containers
