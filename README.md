@@ -13,15 +13,6 @@ $ cd nodejs-task-manager-nunjucks-mysql-knex-passport
 $ docker-compose up -d
 ```
 
-### Destruindo a infraestrutura criada para o projeto 
-```sh
-$ cd nodejs-task-manager-nunjucks-mysql-knex-passport
-$ docker-compose down -d --remove-orphans # to remove context containers
-$ docker image rm $(docker images | grep 'nodejs-task-manager-nunjucks-mysql-knex-passport*' | awk '{print $3}') --force # to remove created images
-$ docker volume prune # y - to remove unsed volumes
-$ docker system prune # y - to remove unsed data
-```
-
 ### Configurações padrões
 
 ##### Usuário da aplicação
@@ -40,4 +31,13 @@ port: 13306
 database: controle_tarefas
 username: controle_tarefas
 password: p@$$w0rd
+```
+
+### Destruindo a infraestrutura criada para o projeto 
+```sh
+$ cd nodejs-task-manager-nunjucks-mysql-knex-passport
+$ docker-compose down -d --remove-orphans # to remove context containers
+$ docker image rm $(docker images | grep 'nodejs-task-manager-nunjucks-mysql-knex-passport*' | awk '{print $3}') --force # to remove created images
+$ docker volume prune # y - to remove unsed volumes
+$ docker system prune # y - to remove unsed data
 ```
