@@ -1,41 +1,44 @@
+#!/usr/bin/env node
+
 var express = require('express');
 var path = require('path');
-//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var methodOverride = require('method-override');
-
-require('./auth/passport');
-
 var expressNunjucks = require('express-nunjucks');
-
 var authRouter = require('./routes/auth');
 var tasksRouter = require('./routes/tasks');
+require('./auth/passport');
 
 var app = express();
 
+//view engine settings
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'njk');
 expressNunjucks(app,{watch:true, noCache: true});
 
+//session manager settings
 app.use(session({
   secret: 'app-sessoes-tarefas',
   resave: false,
   saveUninitialized: false,
 }));
 
+//authorize manager settings
 app.use(passport.initialize());
 app.use(passport.session());
 
+//default settings
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//proxy http method override
 app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 
@@ -45,6 +48,7 @@ app.use(methodOverride(function (req, res) {
   }
 }));
 
+//using custom routes
 app.use('/', authRouter);
 app.use('/', tasksRouter);
 

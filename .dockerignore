@@ -1,0 +1,6 @@
+.gitignore
+.env
+*.md
+README-secret.md
+!README*.md
+node_modules/

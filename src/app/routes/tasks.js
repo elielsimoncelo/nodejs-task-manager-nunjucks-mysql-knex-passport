@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 const express = require('express');
 const router = express.Router();
 const authorize = require('../middlewares/authorize');
 const Tasks = () => require('../database/db')('tasks');
 
 router.get('/', authorize.isAuth, (req, res, next) => {
-  Tasks().then((tasks) => {
+  Tasks().where('userid', req.user.id) .then((tasks) => {
     res.render('index', {
       tasks: tasks,
       isAuth: req.isAuthenticated(),
@@ -21,6 +23,8 @@ router.get('/add', authorize.isAuth, (req, res, next) => {
 });
 
 router.post('/add', authorize.isAuth, (req, res, next) => {
+  req.body.userid = req.user.id;
+
   Tasks().insert(req.body).then((_) => {
     res.redirect('/');
   }, next);

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const authorize = {
     isAuth: (req, res, next) => {
         if (!req.isAuthenticated()) {

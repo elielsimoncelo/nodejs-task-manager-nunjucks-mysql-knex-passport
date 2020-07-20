@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const db = require('../database/db');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;

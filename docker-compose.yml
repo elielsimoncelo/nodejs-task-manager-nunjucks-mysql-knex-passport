@@ -1,0 +1,52 @@
+version: '3.3'
+
+services:
+  app:
+    build: ./src/app
+    container_name: sousaeliel-task-manager-app
+    restart: always
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      NODE_ENV: development
+    ports:
+      - '13000:3000'
+    expose:
+      - '13000'
+    networks:
+      - app-network
+    links:
+      - db
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      timeout: 30s
+      retries: 10
+
+  db:
+    build: ./src/db
+    container_name: sousaeliel-task-manager-mysql
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_USER: $DB_USER
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_PASSWORD: $DB_PASSWORD
+    ports:
+      - '$DB_PORT:3306'
+    expose:
+      - '$DB_PORT'
+    networks:
+      - app-network
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost' ]
+      timeout: 20s
+      retries: 10
+
+networks:
+  app-network:
+    driver: bridge
